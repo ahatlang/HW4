@@ -69,3 +69,50 @@ plt.ylim(-100, 100)
 plt.show()
 #endregion
 
+"""
+#HW4b
+from scipy.optimize import fsolve
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the equations
+def equation_1(x):
+    return x - 3 * np.cos(x)
+
+def equation_2(x):
+    return np.cos(2 * x) * x**3
+
+# Initial guesses for the roots
+initial_guess_1 = 0
+initial_guess_2 = [0, 1, -1]  # Multiple initial guesses for equation 2
+
+# Find roots using fsolve
+root_1 = fsolve(equation_1, initial_guess_1)
+root_2 = fsolve(equation_2, initial_guess_2)
+
+# Check if functions intersect
+if any(np.isclose(root_1, root_2)):
+    intersection_points = [point[0] for point in root_1 if any(np.isclose(point, root_2))]
+    print(f"The functions intersect at x = {intersection_points}")
+else:
+    print("The functions do not intersect.")
+
+# Plot the functions
+x_values = np.linspace(-5, 5, 1000)
+y_values_1 = equation_1(x_values)
+y_values_2 = equation_2(x_values)
+
+plt.figure(figsize=(8, 6))
+plt.plot(x_values, y_values_1, label='Equation 1: $x - 3\cos(x)$')
+plt.plot(x_values, y_values_2, label='Equation 2: $cos(2x)x^3$')
+plt.scatter(root_1, np.zeros_like(root_1), color='red', label='Root of Equation 1')
+plt.scatter(root_2, equation_2(root_2), color='blue', label='Roots of Equation 2')
+
+plt.title('Intersection of Equations')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axhline(0, color='black', linewidth=0.5, linestyle='--')
+plt.legend()
+plt.grid(True)
+plt.show()
+"""
